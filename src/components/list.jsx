@@ -91,6 +91,7 @@ const List = () => {
 
     }
     const handleOnDragEnd = (result) => {
+        if (!result.destination) return;
         let temp = [...todos];
         const [reorderItem] = temp.splice(result.source.index, 1);
         temp.splice(result.destination.index, 0, reorderItem);
