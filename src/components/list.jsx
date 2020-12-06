@@ -161,6 +161,12 @@ const List = () => {
 
 
 
+
+            </div>
+            <div className="filtering-options-mobile">
+                {filtering.map((option) => {
+                    return <p key={option.id} onClick={() => handleFilter(option)} className={option.active ? 'active' : ''}>{option.value}</p>
+                })}
             </div>
             <p className="dragDropMessage">Drag and drop to reorder list</p>
         </React.Fragment>
