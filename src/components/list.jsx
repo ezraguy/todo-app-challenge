@@ -48,10 +48,10 @@ const List = () => {
                 temp = todosCopy.filter((item) => item.done === true);
                 setTodos(temp)
                 break
-          default:
-              console.log('s');
-                
-               
+            default:
+                console.log('s');
+
+
         }
 
         changeFilterClass(option);
@@ -90,50 +90,64 @@ const List = () => {
         setTodosCopy(temp);
 
     }
+    const handleOnDragEnd = (result) => {
+        let temp = [...todos];
+        const [reorderItem] = temp.splice(result.source.index, 1);
+        temp.splice(result.destination.index, 0, reorderItem);
+        setTodos(temp);
+        setTodosCopy(temp);
+    }
     return (
         <div className="list">
             <NewTodo />
-            <DragDropContext onDragEnd={() => console.log('s')}>;
-          
-            <Droppable droppableId="tasks">
-                    {(provided) => {
-
-                        <div className="todos" {...provided.droppableProps} ref={provided.innerRef}>
+            <DragDropContext onDragEnd={(result) => handleOnDragEnd(result)}>
+                <Droppable droppableId="tasks">
+                    {(provided) => (
+                        <div className="todos"  {...provided.droppableProps} ref={provided.innerRef}  >
                             {todos.map((todo, index) => {
                                 return (
-                                    <Draggable key={todo.id} draggableId={todo.id} index={index} >
-                                        <div className="todo">
-                                            <div className="circle-wrap">
-                                                <div className={todo.done === true ? "circle circle-done" : 'circle'} onClick={() => handleFinishTodo(todo)}>
-                                                    {
-                                                        todo.done === true &&
-                                                        <img src={check} className="check" alt="check" />
-                                                    }
+                                    <Draggable key={todo.id} draggableId={todo.id.toString()} index={index}>
+                                        {(provided) => (
+                                            <div className="todo" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                <div className="circle-wrap">
+                                                    <div className={todo.done === true ? "circle circle-done" : 'circle'} onClick={() => handleFinishTodo(todo)}>
+                                                        {
+                                                            todo.done === true &&
+                                                            <img src={check} className="check" alt="check" />
+                                                        }
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <input type="text" disabled={true} className={todo.done === true ? "todo-input done" : 'todo-input '} placeholder={todo.text} />
+                                                <p className={todo.done === true ? "task-value done" : 'task-value '} >{todo.text}</p>
 
-                                        </div>
+                                            </div>
+
+                                        )}
                                     </Draggable>
                                 )
                             })}
-                            <div className="filter">
-                                <div className="items-left">
-                                    <p>{todos.length} items left</p>
-                                </div>
-                                <div className="filtering-options">
-                                    {filtering.map((option) => {
-                                        return <p key={option.id} onClick={() => handleFilter(option)} className={option.active ? 'active' : ''}>{option.value}</p>
-                                    })}
-                                </div>
-                                <div className="clear">
-                                    <p onClick={clearCompleted}>clear Completed</p>
-                                </div>
-                            </div>
-                        </div >
-                    }}
+                            {provided.placeholder}
+                        </div>
+
+                    )}
                 </Droppable>
             </DragDropContext>
+
+            <div className="filter">
+                <div className="items-left">
+                    <p>{todos.length} items left</p>
+                </div>
+                <div className="filtering-options">
+                    {filtering.map((option) => {
+                        return <p key={option.id} onClick={() => handleFilter(option)} className={option.active ? 'active' : ''}>{option.value}</p>
+                    })}
+                </div>
+                <div className="clear">
+                    <p onClick={clearCompleted}>clear Completed</p>
+                </div>
+            </div>
+
+
+
 
         </div >
     );

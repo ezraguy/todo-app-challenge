@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import '../scss/nav.scss';
 import sun from '../icons/icon-sun.svg';
 import moon from '../icons/icon-moon.svg';
-import { ThemeContext } from '../context/Theme-context';
+import { ThemeContext } from '../context/theme-context';
 
 
 const Nav = () => {

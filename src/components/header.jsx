@@ -4,7 +4,7 @@ import headerImgLight from '../images/bg-desktop-light.jpg';
 import headerImgDark from '../images/bg-desktop-dark.jpg';
 import headerImgLightMobile from '../images/bg-mobile-light.jpg';
 import headerImgDarkMobile from '../images/bg-mobile-dark.jpg';
-import { ThemeContext } from '../context/Theme-context';
+import { ThemeContext } from '../context/theme-context';
 
 
 const Header = () => {

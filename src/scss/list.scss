@@ -1,4 +1,4 @@
-@import 'new-todo.scss';
+
 .list{
     border-radius: 10px ;
     
@@ -12,22 +12,69 @@
         flex-direction: column;
         overflow: hidden;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
+        min-height: 50px;
         .todo{
-            @extend .new-todo;
-            border-radius: 0px !important;
+           min-height: 50px;
+            cursor: pointer;
+            border-radius: 0px ;
             background-color: white;
             margin-bottom: 0;
+            max-width: 100%;
             border-bottom: 1px #E3E4F1 solid;
-            transition: .5s ease;
-            animation-duration: 1s;
-            animation-fill-mode: forwards;
+           
+           
+           
+            padding: 0 ;
             .done{
                 text-decoration: line-through;
+            }
+            .circle-wrap{
+                width: 24px;
+                height: 24px;
+                position: absolute;
+                border-radius: 50%;
+                border: 1.8px gray solid;
+                transition: .5s ease;
+                margin-top: 14px;
+                margin-left: 14px;
+              
+              
+            &:hover{
+                background: linear-gradient(#55DDFF, #A875F6);
+            }
+            
+            .circle{
+                background-color: #fff;
+                position: absolute;
+                z-index: 2;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: .5s ease;
+               
+               
+                .check{
+                    padding: 5px;
+                    z-index: 10;
+                    width: 15px;
+                }
+               
+                }
             }
             .circle-done{
                 background: linear-gradient(#55DDFF, #A875F6);
             }   
+            .task-value{
+               font-family: 'Josefin Sans';
+                padding-left: 50px;
+                padding-top: 15px;
+                max-width:100%;
+                margin: 0;
+                font-size: 14pt;
+                height:50px;
+                color: #494c6b;
+            }
         }
     }
     .filter{
