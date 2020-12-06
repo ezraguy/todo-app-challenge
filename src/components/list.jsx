@@ -132,7 +132,7 @@ const List = () => {
                                                         </div>
                                                     </div>
                                                     <p className={todo.done === true ? "task-value done" : 'task-value '} >{todo.text}</p>
-                                                    {/* TODO: ADD X BUTTON */}
+
                                                     <img src={xBtn} className="x-btn" onClick={() => clearCompleted(index, 'single')} alt="x icon" />
                                                 </div>
 
