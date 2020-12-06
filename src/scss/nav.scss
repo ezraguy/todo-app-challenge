@@ -1,0 +1,17 @@
+.nav{
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .logo{
+       h3{
+           color: white;
+           font-size: 24pt;
+           letter-spacing: 10px;
+       } 
+    }
+    .theme-icon{
+        cursor: pointer;
+       
+    }
+}

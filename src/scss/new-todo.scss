@@ -1,0 +1,58 @@
+.new-todo{
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin-bottom:20px; 
+    transition: .5s ease;
+   
+    input{
+       width: inherit;
+        border: 0;
+        outline: 0;
+        border-radius: 0px;
+        height: 55px;
+        box-sizing: border-box;
+        padding-left: 60px;
+        font-size: 14pt;
+    }
+
+    .new-todo-input{
+        border-radius: 5px;
+    }
+ 
+
+    .circle-wrap{
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        border-radius: 50%;
+        border: 1.8px gray solid;
+        transition: .5s ease;
+        margin-top: 14px;
+        margin-left: 14px;
+      
+      
+    &:hover{
+        background: linear-gradient(#55DDFF, #A875F6);
+    }
+    
+    .circle{
+        background-color: #fff;
+        position: absolute;
+        z-index: 2;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: .5s ease;
+       
+       
+        .check{
+            padding: 5px;
+            z-index: 10;
+            width: 15px;
+        }
+       
+        }
+    }
+}

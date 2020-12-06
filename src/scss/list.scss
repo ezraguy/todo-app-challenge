@@ -1,0 +1,58 @@
+@import 'new-todo.scss';
+.list{
+    border-radius: 10px ;
+    
+    input{
+        transition: .5s ease;
+    }
+    .todos{
+        background-color: #fff;
+        border-radius: 7px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+        .todo{
+            @extend .new-todo;
+            border-radius: 0px !important;
+            background-color: white;
+            margin-bottom: 0;
+            border-bottom: 1px #E3E4F1 solid;
+            transition: .5s ease;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+            .done{
+                text-decoration: line-through;
+            }
+            .circle-done{
+                background: linear-gradient(#55DDFF, #A875F6);
+            }   
+        }
+    }
+    .filter{
+        display: flex;
+        color: gray;
+        padding: 0px 7px;
+        justify-content: space-between;
+        .filtering-options{
+            display: flex;
+            width: 200px;
+            justify-content: space-evenly;
+            text-transform: capitalize;
+            .active{
+                color:#4281fd;
+            }
+        }
+        .filtering-options,.clear{
+            p{
+                cursor: pointer;
+                &:hover{
+                    color:rgb(31, 31, 31);
+                }
+            }
+        }
+    
+    }
+}
+

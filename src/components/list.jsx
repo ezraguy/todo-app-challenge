@@ -41,18 +41,23 @@ const List = () => {
                 setTodos([...todosCopy])
                 break
             case 'active':
-                temp = todosCopy.filter((item: { done: boolean; }) => item.done === false);
+                temp = todosCopy.filter((item) => item.done === false);
                 setTodos(temp)
                 break
             case 'completed':
-                temp = todosCopy.filter((item: { done: boolean; }) => item.done === true);
+                temp = todosCopy.filter((item) => item.done === true);
                 setTodos(temp)
+                break
+          default:
+              console.log('s');
+                
+               
         }
 
         changeFilterClass(option);
     }
 
-    const changeFilterClass = (option: option) => {
+    const changeFilterClass = (option) => {
         let filteringCopy = [...filtering];
         for (let index = 0; index < filteringCopy.length; index++) {
             const element = filteringCopy[index];
