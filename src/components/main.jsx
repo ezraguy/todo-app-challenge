@@ -9,6 +9,7 @@ const Main = () => {
 
     return (
         <div className={LightTheme ? "main" : "main dark-theme"}>
+
             <Nav />
             <List />
         </div>

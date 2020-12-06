@@ -162,6 +162,7 @@ const List = () => {
 
 
             </div>
+            <p className="dragDropMessage">Drag and drop to reorder list</p>
         </React.Fragment>
 
     );

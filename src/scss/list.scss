@@ -1,23 +1,22 @@
 
 .list{
-    border-radius: 10px ;
+   border-radius: 0px 0px 7px 7px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     input{
         transition: .5s ease;
     }
     .todos{
         background-color: #fff;
-        border-radius: 7px;
+        border-radius: 7px 7px 0px 0px;
         display: flex;
         flex-direction: column;
         overflow: hidden;
        
         min-height: 50px;
         .todo{
-           min-height: 50px;
-           position: relative;
+            min-height: 60px;
+            position: relative;
             cursor: pointer;
-            border-radius: 0px ;
             background-color: white;
             margin-bottom: 0;
             max-width: 100%;
@@ -69,11 +68,11 @@
             .task-value{
                font-family: 'Josefin Sans';
                 padding-left: 50px;
-                padding-top: 15px;
+                padding-top: 20px;
                 max-width:100%;
                 margin: 0;
                 font-size: 14pt;
-                height:50px;
+               height: 100%;
                 color: #494c6b;
             }
             .x-btn{
@@ -94,9 +93,9 @@
     .filter{
         display: flex;
         color: gray;
-        
         padding: 0px 7px;
         justify-content: space-between;
+
         .filtering-options{
             display: flex;
             width: 200px;
@@ -116,5 +115,13 @@
         }
     
     }
+   
 }
 
+.dragDropMessage{  
+    margin-top: 50px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    color: #b1b2bd;
+}

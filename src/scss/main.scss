@@ -1,38 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 .main{
     position: relative;
+    z-index: 2;
     max-width: 33rem;
     min-height: 100%;
     margin: auto;
     top: -200px;
-   font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
 
 }
 
 
 .dark-theme{
-   
-    .list{
-       
-        input{
+    .new-todo{
+        .new-todo-input{
             transition: .5s ease;
-            background-color: #25273C;
+            background-color: #25273C ;
             color: white ;
         }
-
+        .circle-wrap{
+            .circle{
+                background-color: #25273C;
+            }
+        }
+    }
+    
+    .list{
+        
         .todos{
-            background-color: #25273C;
             .todo{
-
+                border-radius:2px 2px 0px 0px;
+                background-color: #25273C;
                 .task-value{
                     background-color: #25273C;
                     color: white ;
                 }
-                .circle-wrap{
-                   
+                .circle-wrap{   
                     .circle{
                         background-color: #25273C ;
-                        }        
+                    }        
                 }
             }
         }
@@ -47,7 +53,7 @@
         }
 
         .filter{
-
+            border-radius: 0px 0px 10px 10px ;
             background-color: #25273C ;
             .filtering-options,.clear{
                 p{
@@ -58,6 +64,10 @@
             }
         }
     }
+    .dragDropMessage{
+        color: white;
+    }
+   
 }
 
 
