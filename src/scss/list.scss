@@ -1,7 +1,7 @@
 
 .list{
     border-radius: 10px ;
-    
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     input{
         transition: .5s ease;
     }
@@ -11,10 +11,11 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+       
         min-height: 50px;
         .todo{
            min-height: 50px;
+           position: relative;
             cursor: pointer;
             border-radius: 0px ;
             background-color: white;
@@ -22,7 +23,7 @@
             max-width: 100%;
             border-bottom: 1px #E3E4F1 solid;
            
-           
+           &:hover{}
            
             padding: 0 ;
             .done{
@@ -75,11 +76,25 @@
                 height:50px;
                 color: #494c6b;
             }
+            .x-btn{
+                position: absolute;
+                top: 1em;
+                right: 1em;
+                opacity: 0;
+
+            }
+            
+        }
+        .no-tasks-left{
+            margin-right: auto;
+            margin-left: auto;
+           font-size: 14pt;
         }
     }
     .filter{
         display: flex;
         color: gray;
+        
         padding: 0px 7px;
         justify-content: space-between;
         .filtering-options{

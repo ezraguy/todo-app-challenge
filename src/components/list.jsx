@@ -5,7 +5,7 @@ import NewTodo from './new-todo';
 import { ToDoContext } from '../context/todos-context';
 import { ToDoCopyContext } from '../context/todos-copy-context';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
+import xBtn from '../icons/icon-cross.svg';
 
 
 const List = () => {
@@ -97,59 +97,73 @@ const List = () => {
         setTodos(temp);
         setTodosCopy(temp);
     }
+    const calcLeftItems = () => {
+        let itemsLeft = todos.filter(item => item.done === false);
+        return itemsLeft.length
+
+
+    }
     return (
-        <div className="list">
+        <React.Fragment>
+
             <NewTodo />
-            <DragDropContext onDragEnd={(result) => handleOnDragEnd(result)}>
-                <Droppable droppableId="tasks">
-                    {(provided) => (
-                        <div className="todos"  {...provided.droppableProps} ref={provided.innerRef}  >
-                            {todos.map((todo, index) => {
-                                return (
-                                    <Draggable key={todo.id} draggableId={todo.id.toString()} index={index}>
-                                        {(provided) => (
-                                            <div className="todo" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                                                <div className="circle-wrap">
-                                                    <div className={todo.done === true ? "circle circle-done" : 'circle'} onClick={() => handleFinishTodo(todo)}>
-                                                        {
-                                                            todo.done === true &&
-                                                            <img src={check} className="check" alt="check" />
-                                                        }
+            <div className="list">
+
+                <DragDropContext onDragEnd={(result) => handleOnDragEnd(result)}>
+                    <Droppable droppableId="tasks">
+                        {(provided) => (
+                            <div className="todos"  {...provided.droppableProps} ref={provided.innerRef}  >
+                                {todosCopy.length === 0 && <p className="no-tasks-left">Great Job!</p>}
+                                {todos.map((todo, index) => {
+                                    return (
+                                        <Draggable key={todo.id} draggableId={todo.id.toString()} index={index}>
+                                            {(provided) => (
+                                                <div className="todo" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                    <div className="circle-wrap">
+                                                        <div className={todo.done === true ? "circle circle-done" : 'circle'} onClick={() => handleFinishTodo(todo)}>
+                                                            {
+                                                                todo.done === true &&
+                                                                <img src={check} className="check" alt="check" />
+                                                            }
+                                                        </div>
                                                     </div>
+                                                    <p className={todo.done === true ? "task-value done" : 'task-value '} >{todo.text}</p>
+                                                    {/* TODO: ADD X BUTTON */}
+                                                    <img src={xBtn} className="x-btn" alt="x icon" />
                                                 </div>
-                                                <p className={todo.done === true ? "task-value done" : 'task-value '} >{todo.text}</p>
 
-                                            </div>
+                                            )}
 
-                                        )}
-                                    </Draggable>
-                                )
-                            })}
-                            {provided.placeholder}
-                        </div>
+                                        </Draggable>
+                                    )
+                                })}
+                                {provided.placeholder}
+                            </div>
 
-                    )}
-                </Droppable>
-            </DragDropContext>
+                        )}
+                    </Droppable>
+                </DragDropContext>
 
-            <div className="filter">
-                <div className="items-left">
-                    <p>{todos.length} items left</p>
+                <div className="filter">
+                    <div className="items-left">
+                        <p>{calcLeftItems()} items left</p>
+                    </div>
+                    <div className="filtering-options">
+                        {filtering.map((option) => {
+                            return <p key={option.id} onClick={() => handleFilter(option)} className={option.active ? 'active' : ''}>{option.value}</p>
+                        })}
+                    </div>
+                    <div className="clear">
+                        <p onClick={clearCompleted}>clear Completed</p>
+                    </div>
                 </div>
-                <div className="filtering-options">
-                    {filtering.map((option) => {
-                        return <p key={option.id} onClick={() => handleFilter(option)} className={option.active ? 'active' : ''}>{option.value}</p>
-                    })}
-                </div>
-                <div className="clear">
-                    <p onClick={clearCompleted}>clear Completed</p>
-                </div>
+
+
+
+
             </div>
+        </React.Fragment>
 
-
-
-
-        </div >
     );
 }
 
