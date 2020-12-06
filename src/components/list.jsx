@@ -70,22 +70,26 @@ const List = () => {
         setFiltering(filteringCopy);
     }
 
-    const clearCompleted = () => {
+    const clearCompleted = (item, type) => {
         let temp = [...todos];
-        let itemsToRemove = []
-        for (let index = 0; index < temp.length; index++) {
-            const element = temp[index];
-            if (element.done === true) {
-                itemsToRemove.push(index)
+        if (type === 'All') {
+            let itemsToRemove = []
+            for (let index = 0; index < temp.length; index++) {
+                const element = temp[index];
+                if (element.done === true) {
+                    itemsToRemove.push(index)
+                }
+
             }
 
+            for (let index = itemsToRemove.length - 1; index >= 0; index--) {
+                temp.splice(itemsToRemove[index], 1);
+            }
         }
 
-        for (let index = itemsToRemove.length - 1; index >= 0; index--) {
-            temp.splice(itemsToRemove[index], 1);
+        if (type === 'single') {
+            temp.splice(item, 1);
         }
-
-
         setTodos(temp);
         setTodosCopy(temp);
 
@@ -109,7 +113,6 @@ const List = () => {
 
             <NewTodo />
             <div className="list">
-
                 <DragDropContext onDragEnd={(result) => handleOnDragEnd(result)}>
                     <Droppable droppableId="tasks">
                         {(provided) => (
@@ -130,7 +133,7 @@ const List = () => {
                                                     </div>
                                                     <p className={todo.done === true ? "task-value done" : 'task-value '} >{todo.text}</p>
                                                     {/* TODO: ADD X BUTTON */}
-                                                    <img src={xBtn} className="x-btn" alt="x icon" />
+                                                    <img src={xBtn} className="x-btn" onClick={() => clearCompleted(index, 'single')} alt="x icon" />
                                                 </div>
 
                                             )}
@@ -155,13 +158,9 @@ const List = () => {
                         })}
                     </div>
                     <div className="clear">
-                        <p onClick={clearCompleted}>clear Completed</p>
+                        <p onClick={() => clearCompleted(null, 'All')}>clear Completed</p>
                     </div>
                 </div>
-
-
-
-
 
             </div>
             <div className="filtering-options-mobile">

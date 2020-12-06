@@ -22,7 +22,19 @@
             max-width: 100%;
             border-bottom: 1px #E3E4F1 solid;
            
-           &:hover{}
+           &:hover{
+               .x-btn{
+                  opacity: 1;
+               }
+           }
+           .x-btn{
+               transition: .2s ease;
+            position: absolute;
+            top: 1em;
+            right: 1em;
+            opacity: 0;
+
+        }
            
             padding: 0 ;
             .done{
@@ -75,13 +87,7 @@
                height: 100%;
                 color: #494c6b;
             }
-            .x-btn{
-                position: absolute;
-                top: 1em;
-                right: 1em;
-                opacity: 0;
-
-            }
+            
             
         }
         .no-tasks-left{
@@ -119,8 +125,6 @@
    
 }
 .filtering-options-mobile{
-     
-   
         cursor: pointer;
         display: flex;
         width: 100%;
