@@ -10,9 +10,9 @@
         border-radius: 7px 7px 0px 0px;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
-       
         min-height: 50px;
+        
+
         .todo{
             min-height: 60px;
             position: relative;
@@ -21,8 +21,11 @@
             margin-bottom: 0;
             max-width: 100%;
             border-bottom: 1px #E3E4F1 solid;
-           
+            
            &:hover{
+               box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+               transform: scale(1.1);
+               z-index: 10;
                .x-btn{
                   opacity: 1;
                }
@@ -39,6 +42,8 @@
             padding: 0 ;
             .done{
                 text-decoration: line-through;
+                transition: .5s ease;
+                color: rgb(172, 172, 172) !important;
             }
             .circle-wrap{
                 width: 24px;
@@ -153,7 +158,6 @@
     font-size: 11px;
     text-align: center;
     color: black;
-    position: fixed;
     bottom: 10px;
     margin-right: auto;
     margin-left: auto;

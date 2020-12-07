@@ -3,57 +3,76 @@ import '../scss/list.scss';
 import check from '../icons/icon-check.svg';
 import NewTodo from './new-todo';
 import { ToDoContext } from '../context/todos-context';
-import { ToDoCopyContext } from '../context/todos-copy-context';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import xBtn from '../icons/icon-cross.svg';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const List = () => {
     const [todos, setTodos] = useContext(ToDoContext);
-    const [todosCopy, setTodosCopy] = useContext(ToDoCopyContext);
     const [filtering, setFiltering] = useState([
         { id: 1, value: 'all', active: true },
         { id: 2, value: 'active', active: false },
         { id: 3, value: 'completed', active: false }]);
+
 
     const handleFinishTodo = (todo) => {
         let id = todo.id;
         const tasks = [...todos];
         for (let index = 0; index < tasks.length; index++) {
             const element = tasks[index];
-            if (id === element.id)
+            if (id === element.id && element.done === false)
                 element.done = true;
+            else
+                if (id === element.id && element.done === true) {
+                    element.done = false
+                }
         }
 
         setTodos(tasks);
+
     }
 
-    useEffect(() => {
-        let temp = [...todos];
-        setTodosCopy(temp);
-    }, []);
+
 
 
     const handleFilter = (option) => {
-        let temp = [];
+        let temp = [...todos];
         switch (option.value) {
             case 'all':
-                setTodos([...todosCopy])
+                for (let index = 0; index < temp.length; index++) {
+                    const element = temp[index];
+                    element.show = true
+                }
                 break
             case 'active':
-                temp = todosCopy.filter((item) => item.done === false);
-                setTodos(temp)
+                for (let index = 0; index < temp.length; index++) {
+                    const element = temp[index];
+                    if (element.done === false)
+                        element.show = true
+                    else
+                        element.show = false
+                }
+
                 break
             case 'completed':
-                temp = todosCopy.filter((item) => item.done === true);
-                setTodos(temp)
+                for (let index = 0; index < temp.length; index++) {
+                    const element = temp[index];
+                    if (element.done === true)
+                        element.show = true
+                    else
+                        element.show = false
+                }
+
                 break
             default:
-                console.log('s');
+                return
 
 
         }
-
+        setTodos(temp);
         changeFilterClass(option);
     }
 
@@ -73,25 +92,23 @@ const List = () => {
     const clearCompleted = (item, type) => {
         let temp = [...todos];
         if (type === 'All') {
-            let itemsToRemove = []
-            for (let index = 0; index < temp.length; index++) {
-                const element = temp[index];
-                if (element.done === true) {
-                    itemsToRemove.push(index)
+            let i = 0;
+            while (i < temp.length) {
+                if (temp[i].done === true) {
+                    temp.splice(i, 1);
                 }
-
+                else
+                    i++;
             }
-
-            for (let index = itemsToRemove.length - 1; index >= 0; index--) {
-                temp.splice(itemsToRemove[index], 1);
-            }
+            toast("Completed tasks were cleared!");
         }
 
         if (type === 'single') {
             temp.splice(item, 1);
         }
         setTodos(temp);
-        setTodosCopy(temp);
+
+
 
     }
     const handleOnDragEnd = (result) => {
@@ -100,7 +117,7 @@ const List = () => {
         const [reorderItem] = temp.splice(result.source.index, 1);
         temp.splice(result.destination.index, 0, reorderItem);
         setTodos(temp);
-        setTodosCopy(temp);
+
     }
     const calcLeftItems = () => {
         let itemsLeft = todos.filter(item => item.done === false);
@@ -110,17 +127,19 @@ const List = () => {
     }
     return (
         <React.Fragment>
-
+            <ToastContainer />
             <NewTodo />
             <div className="list">
                 <DragDropContext onDragEnd={(result) => handleOnDragEnd(result)}>
                     <Droppable droppableId="tasks">
                         {(provided) => (
                             <div className="todos"  {...provided.droppableProps} ref={provided.innerRef}  >
-                                {todosCopy.length === 0 && <p className="no-tasks-left">Great Job!</p>}
+                                {todos.length === 0 && <p className="no-tasks-left">Great Job!</p>}
                                 {todos.map((todo, index) => {
-                                    return (
-                                        <Draggable key={todo.id} draggableId={todo.id.toString()} index={index}>
+                                    if (todo.show === true) {
+
+
+                                        return (<Draggable key={todo.id} draggableId={todo.id.toString()} index={index}>
                                             {(provided) => (
                                                 <div className="todo" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                                                     <div className="circle-wrap">
@@ -138,9 +157,21 @@ const List = () => {
 
                                             )}
 
-                                        </Draggable>
-                                    )
-                                })}
+                                        </Draggable>)
+                                    }
+
+                                }
+
+
+
+
+
+
+
+
+
+
+                                )}
                                 {provided.placeholder}
                             </div>
 
@@ -158,7 +189,7 @@ const List = () => {
                         })}
                     </div>
                     <div className="clear">
-                        <p onClick={() => clearCompleted(null, 'All')}>clear Completed</p>
+                        <p onClick={() => clearCompleted(0, 'All')}>clear Completed</p>
                     </div>
                 </div>
 

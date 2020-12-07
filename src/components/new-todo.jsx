@@ -1,23 +1,29 @@
 import React, { useEffect, useState, useContext } from 'react';
 import '../scss/new-todo.scss';
 import { ToDoContext } from '../context/todos-context';
-import { ToDoCopyContext } from '../context/todos-copy-context';
 
 
 
 const NewTodo = () => {
     const [taskValue, setTaskValue] = useState('');
     const [todos, setTodos] = useContext(ToDoContext);
-    const [todosCopy, setTodosCopy] = useContext(ToDoCopyContext);
+
 
 
     const addNewTodo = (e) => {
         if (e.key === 'Enter') {
             let temp = [...todos];
-            let newTodo = { id: temp.length + 1, text: taskValue, done: false };
+            let max = 0;
+            for (let index = 0; index < temp.length; index++) {
+                const element = temp[index];
+
+                if (element.id > max)
+                    max = element.id
+            }
+
+            let newTodo = { id: max + 1, text: taskValue, done: false, show: true };
             temp.push(newTodo);
             setTodos(temp);
-            setTodosCopy(temp);
             setTaskValue('');
         }
     }
