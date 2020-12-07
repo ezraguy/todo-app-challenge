@@ -30,13 +30,10 @@ const List = () => {
                     element.done = false
                 }
         }
-
         setTodos(tasks);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
 
     }
-
-
-
 
     const handleFilter = (option) => {
         let temp = [...todos];
@@ -68,7 +65,7 @@ const List = () => {
 
                 break
             default:
-                return
+                console.log('default');
 
 
         }
@@ -106,11 +103,13 @@ const List = () => {
         if (type === 'single') {
             temp.splice(item, 1);
         }
+        localStorage.setItem('tasks', JSON.stringify(temp));
         setTodos(temp);
 
 
 
     }
+
     const handleOnDragEnd = (result) => {
         if (!result.destination) return;
         let temp = [...todos];
@@ -119,12 +118,29 @@ const List = () => {
         setTodos(temp);
 
     }
-    const calcLeftItems = () => {
-        let itemsLeft = todos.filter(item => item.done === false);
-        return itemsLeft.length
 
+    useEffect(() => {
+        if (localStorage.getItem('tasks')) {
+            let items = localStorage.getItem('tasks');
+            items = JSON.parse(items);
+            for (let index = 0; index < items.length; index++) {
+                const element = items[index];
+                element.show = true;
+            }
+            setTodos(items)
 
-    }
+        }
+        else {
+            localStorage.setItem('tasks', JSON.stringify([{ id: 1, text: 'complete online Javascript course', done: true, show: true },
+            { id: 2, text: 'Jog around the park for 10 minutes', done: false, show: true },
+            { id: 3, text: 'Read for 1 hour', done: false, show: true },
+            { id: 4, text: 'pick up groceries', done: false, show: true },
+            { id: 5, text: 'Complete Todo App on Frontend Mentor', done: false, show: true }]));
+            let tasks = localStorage.getItem('tasks');
+            tasks = JSON.parse(tasks);
+            setTodos(tasks)
+        }
+    }, [])
     return (
         <React.Fragment>
             <ToastContainer />
@@ -135,7 +151,7 @@ const List = () => {
                         {(provided) => (
                             <div className="todos"  {...provided.droppableProps} ref={provided.innerRef}  >
                                 {todos.length === 0 && <p className="no-tasks-left">Great Job!</p>}
-                                {todos.map((todo, index) => {
+                                { todos.map((todo, index) => {
                                     if (todo.show === true) {
                                         return (<Draggable key={todo.id} draggableId={todo.id.toString()} index={index}>
                                             {(provided) => (
@@ -159,16 +175,6 @@ const List = () => {
                                     }
 
                                 }
-
-
-
-
-
-
-
-
-
-
                                 )}
                                 {provided.placeholder}
                             </div>
@@ -179,7 +185,7 @@ const List = () => {
 
                 <div className="filter">
                     <div className="items-left">
-                        <p>{calcLeftItems()} items left</p>
+                        <p>{todos.length} items left</p>
                     </div>
                     <div className="filtering-options">
                         {filtering.map((option) => {

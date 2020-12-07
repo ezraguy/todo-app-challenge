@@ -7,7 +7,6 @@ import { ToDoProvider } from './context/todos-context';
 import Background from './components/background';
 
 function App() {
-
   return (
     <div className="App">
       <Background />

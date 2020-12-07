@@ -2,36 +2,36 @@
 .list{
    border-radius: 0px 0px 7px 7px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    input{
-        transition: .5s ease;
-    }
+    
     .todos{
+        border-radius: 10px;
         background-color: #fff;
-        border-radius: 7px 7px 0px 0px;
         display: flex;
         flex-direction: column;
-        min-height: 50px;
-        
-
+     
+    
         .todo{
             min-height: 60px;
             position: relative;
             cursor: pointer;
             background-color: white;
             margin-bottom: 0;
-            max-width: 100%;
+            width: 100%;
             border-bottom: 1px #E3E4F1 solid;
-            
+            &:nth-child(1){
+                border-radius: 7px 7px 0px 0px;
+            }
            &:hover{
                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-               transform: scale(1.1);
+                transition: .3s ease;
                z-index: 10;
+               
                .x-btn{
                   opacity: 1;
                }
            }
            .x-btn{
-               transition: .2s ease;
+            transition: .2s ease;
             position: absolute;
             top: 1em;
             right: 1em;
@@ -105,8 +105,9 @@
         display: flex;
         color: gray;
         padding: 0px 7px;
+        background-color: #fff;
         justify-content: space-between;
-
+        border-radius:0px 0px 7px 7px ;
         .filtering-options{
             display: flex;
             width: 200px;
