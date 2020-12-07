@@ -137,8 +137,6 @@ const List = () => {
                                 {todos.length === 0 && <p className="no-tasks-left">Great Job!</p>}
                                 {todos.map((todo, index) => {
                                     if (todo.show === true) {
-
-
                                         return (<Draggable key={todo.id} draggableId={todo.id.toString()} index={index}>
                                             {(provided) => (
                                                 <div className="todo" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
