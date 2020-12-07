@@ -198,16 +198,16 @@ const List = () => {
                     </Droppable>
                 </DragDropContext>
 
-                <div className="filter">
-                    <div className="items-left">
+                <div className="filter" >
+                    <div className="items-left" >
                         <p>{itemsLeft} items left</p>
                     </div>
-                    <div className="filtering-options">
+                    <div className="filtering-options" >
                         {filtering.map((option) => {
-                            return <p key={option.id} onClick={() => handleFilter(option)} className={option.active ? 'active' : ''}>{option.value}</p>
+                            return <p key={option.id} tabIndex="0" onKeyDown={(e) => { if (e.key === 'Enter') handleFilter(option) }} onClick={() => handleFilter(option)} className={option.active ? 'active' : ''}>{option.value}</p>
                         })}
                     </div>
-                    <div className="clear">
+                    <div className="clear" tabIndex="0">
                         <p onClick={() => clearCompleted(0, 'All')}>clear Completed</p>
                     </div>
                 </div>
@@ -223,7 +223,7 @@ const List = () => {
                 Challenge by <a href="https://www.frontendmentor.io?ref=challenge" >Frontend Mentor</a>.
     Coded by <a href="https://github.com/ezraguy">Guy Ezra</a>.
   </div>
-        </React.Fragment>
+        </React.Fragment >
 
     );
 }

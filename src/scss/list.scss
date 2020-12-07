@@ -11,12 +11,13 @@
      
     
         .todo{
-            min-height: 60px;
             position: relative;
+            min-height: 60px;
             cursor: pointer;
             background-color: white;
             margin-bottom: 0;
-            width: 100%;
+            max-width: 100%;
+           
             border-bottom: 1px #E3E4F1 solid;
             &:nth-child(1){
                 border-radius: 7px 7px 0px 0px;
@@ -33,9 +34,12 @@
            .x-btn{
             transition: .2s ease;
             position: absolute;
-            top: 1em;
-            right: 1em;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            right: 10px;
             opacity: 0;
+            margin-left: 10px;
 
         }
            
@@ -46,15 +50,15 @@
                 color: rgb(172, 172, 172) !important;
             }
             .circle-wrap{
-                width: 24px;
-                height: 24px;
+                width: 25px;
+                height: 25px;
                 position: absolute;
                 border-radius: 50%;
-                border: 1.8px gray solid;
+                border: 1px gray solid;
                 transition: .5s ease;
                 margin-top: 14px;
                 margin-left: 14px;
-              
+                overflow: hidden;
               
             &:hover{
                 background: linear-gradient(#55DDFF, #A875F6);
@@ -64,17 +68,19 @@
                 background-color: #fff;
                 position: absolute;
                 z-index: 2;
-                width: 24px;
-                height: 24px;
+                width: 23px;
+                height: 23px;
+                 margin-left:1px;
                 border-radius: 50%;
                 cursor: pointer;
+                margin-top: 1px;
                 transition: .5s ease;
                
                
                 .check{
                     padding: 5px;
                     z-index: 10;
-                    width: 15px;
+                    width: 14px;
                 }
                
                 }
@@ -83,14 +89,17 @@
                 background: linear-gradient(#55DDFF, #A875F6);
             }   
             .task-value{
-               font-family: 'Josefin Sans';
+                font-family: 'Josefin Sans';
+                 max-width: 70%;
+                word-wrap: break-word;
+                height: inherit;
                 padding-left: 50px;
                 padding-top: 20px;
-                max-width:100%;
                 margin: 0;
                 font-size: 14pt;
-               height: 100%;
                 color: #494c6b;
+
+              
             }
             
             
