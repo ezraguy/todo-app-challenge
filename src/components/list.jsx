@@ -134,10 +134,12 @@ const List = () => {
         }
         else {
             localStorage.setItem('tasks', JSON.stringify([{ id: 1, text: 'complete online Javascript course', done: true, show: true },
-            { id: 2, text: 'Jog around the park for 10 minutes', done: false, show: true },
-            { id: 3, text: 'Read for 1 hour', done: false, show: true },
-            { id: 4, text: 'pick up groceries', done: false, show: true },
-            { id: 5, text: 'Complete Todo App on Frontend Mentor', done: false, show: true }]));
+            { id: 2, text: 'Jog around the park for 3x', done: false, show: true },
+            { id: 3, text: '10 minutes meditation', done: false, show: true },
+            { id: 4, text: 'Read for 1 hour', done: false, show: true },
+            { id: 5, text: 'Pick up groceries', done: false, show: true },
+            { id: 6, text: 'Complete Todo App on Frontend Mentor', done: false, show: true }
+            ]));
             let tasks = localStorage.getItem('tasks');
             tasks = JSON.parse(tasks);
             setTodos(tasks)
