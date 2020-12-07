@@ -23,6 +23,8 @@ const NewTodo = () => {
 
             let newTodo = { id: max + 1, text: taskValue, done: false, show: true };
             temp.push(newTodo);
+            localStorage.setItem('tasks', JSON.stringify(temp));
+
             setTodos(temp);
             setTaskValue('');
         }
