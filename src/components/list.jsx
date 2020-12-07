@@ -115,6 +115,8 @@ const List = () => {
         let temp = [...todos];
         const [reorderItem] = temp.splice(result.source.index, 1);
         temp.splice(result.destination.index, 0, reorderItem);
+        localStorage.setItem('tasks', JSON.stringify(temp));
+
         setTodos(temp);
 
     }
