@@ -16,7 +16,7 @@ const List = () => {
         { id: 1, value: 'all', active: true },
         { id: 2, value: 'active', active: false },
         { id: 3, value: 'completed', active: false }]);
-
+    const [itemsLeft, setItemsLeft] = useState(320)
 
     const handleFinishTodo = (todo) => {
         let id = todo.id;
@@ -32,6 +32,7 @@ const List = () => {
         }
         setTodos(tasks);
         localStorage.setItem('tasks', JSON.stringify(tasks));
+
 
     }
 
@@ -110,6 +111,11 @@ const List = () => {
 
     }
 
+    const calcLeftItems = () => {
+        let items = todos.filter(item => item.done === false);
+        setItemsLeft(items.length)
+    }
+
     const handleOnDragEnd = (result) => {
         if (!result.destination) return;
         let temp = [...todos];
@@ -122,6 +128,11 @@ const List = () => {
     }
 
     useEffect(() => {
+        calcLeftItems()
+
+    }, [todos])
+
+    useEffect(() => {
         if (localStorage.getItem('tasks')) {
             let items = localStorage.getItem('tasks');
             items = JSON.parse(items);
@@ -130,7 +141,7 @@ const List = () => {
                 element.show = true;
             }
             setTodos(items)
-
+            calcLeftItems();
         }
         else {
             localStorage.setItem('tasks', JSON.stringify([{ id: 1, text: 'complete online Javascript course', done: true, show: true },
@@ -189,7 +200,7 @@ const List = () => {
 
                 <div className="filter">
                     <div className="items-left">
-                        <p>{todos.length} items left</p>
+                        <p>{itemsLeft} items left</p>
                     </div>
                     <div className="filtering-options">
                         {filtering.map((option) => {
