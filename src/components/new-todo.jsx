@@ -40,7 +40,7 @@ const NewTodo = () => {
                 <div className="circle"></div>
             </div>
 
-            <input type="text" className="new-todo-input" placeholder="Enter a new todo" value={taskValue} onKeyPress={(e) => addNewTodo(e)} onChange={(e) => handleInputChange(e)} />
+            <input type="text" title="new todo" className="new-todo-input" placeholder="Enter a new todo" value={taskValue} onKeyPress={(e) => addNewTodo(e)} onChange={(e) => handleInputChange(e)} />
         </div>
 
     );
