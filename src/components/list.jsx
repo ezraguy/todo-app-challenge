@@ -207,8 +207,8 @@ const List = () => {
                             return <p key={option.id} tabIndex="0" onKeyDown={(e) => { if (e.key === 'Enter') handleFilter(option) }} onClick={() => handleFilter(option)} className={option.active ? 'active' : ''}>{option.value}</p>
                         })}
                     </div>
-                    <div className="clear" tabIndex="0">
-                        <p onClick={() => clearCompleted(0, 'All')}>clear Completed</p>
+                    <div className="clear" >
+                        <p tabIndex="0" onKeyDown={(e) => { if (e.key === 'Enter') clearCompleted(0, 'All') }} onClick={() => clearCompleted(0, 'All')}>clear Completed</p>
                     </div>
                 </div>
 
